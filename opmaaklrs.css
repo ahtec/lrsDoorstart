@@ -1,0 +1,349 @@
+/*.leerling 
+{
+    width: 60%;
+    display:inline-block;
+        //uitgesterd door gerard 14 jan 2018   height: 80%;   
+
+}*/
+
+.banner{
+    height: 100px;
+    background-color: lightgrey;
+    border-radius: 10px;
+}
+
+/*header{
+    color: red;
+    font-size: 30px;
+    text-align: center;
+}*/
+
+/*nav{
+    height:30px;
+    background-color: grey;
+    border-radius: 10px;
+}*/
+
+.zoek{
+    overflow: auto;
+    white-space: nowrap;
+    display: inline-block;
+    flex-wrap: wrap;
+    background-color: lightblue;
+    border: 3px solid Indigo;
+    width: 15%;
+    height: 580px;
+    justify-content: flex-end;
+    margin-left: 35px;
+    margin-top: 6px;
+    border-radius: 3px;
+    background: linear-gradient(rgba(128,128,128,0.3), rgba(0,0,128,0.7));   
+
+
+}
+
+footer{
+    background-color: grey;
+    height:10px;
+    border-radius: 10px;
+    position: fixed;
+    bottom: 1px;
+    left: 30px;
+    right: 30px;
+    text-align: center;
+    padding: 10px;
+
+}
+
+#newstudent{
+    float: left;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+    background-color: cornflowerblue;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: auto;
+    box-shadow: 10px 10px 5px #888888;
+    /*    position: absolute;
+        right:0;
+        bottom: 100;*/
+}
+
+button:hover {
+    opacity: 0.5;
+}
+#submitKnop:hover{
+    background-color: green;
+    color: white;
+    font-weight: bold;
+}
+#sluitknop:hover{
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+
+#submitKnop{
+    padding: 6px;
+    margin-left: 319px;
+    background-color: #6699ff;
+    color: white;
+    font-weight: bold;
+}
+#sluitknop{
+    padding: 6px;
+    margin-left: 10px;
+    margin-top: 5px;
+    background-color: #6699ff;
+    color: white;
+    font-weight: bold;
+}
+/*Opmaak popup*/
+.popupnaam{
+    position: relative;
+    z-index: 9;
+    top: 20%;
+    margin-left: -60%;
+    border: 1px solid red;
+    background: linear-gradient(rgba(128,128,128,0.9), rgba(0,0,128,1));
+    border-radius: 4px;
+    width: 400px;
+    height: 430px;
+    color: white;
+
+
+}
+#testvak{
+    box-sizing: border-box;
+    display: inline-block;
+    height: 250px;
+    width: 250px;             
+    padding: 20px;              
+}
+body {
+    padding-left: 20px;
+    padding-right: 20px;
+    background: linear-gradient(rgba(0,0,128,0.7), rgba(128,128,128,0.3));
+
+}
+
+/*            img{
+                border: 4px solid red;
+                width: 100%;
+                Height: 100%;              
+            }
+            
+            img:hover{
+               border: 4px solid black;  
+               opacity: .5;                           
+            }*/
+
+/*navigatie balk*/
+
+a {
+    text-decoration: none;
+}
+
+.main-wrapper{
+    margin: 0 auto;
+    width: 1000px;
+}
+.main-container {
+    padding-top: 0px;
+}
+
+.main-container h1 {
+    font-family: arial;
+    font-size: 40px;
+    color: #111;
+    line-height: 80px;
+    text-align: center;
+}
+
+header nav{
+    width: 100%;
+    height: 170px;
+    background-color: #fff;
+    border-radius: 10px;
+
+}
+
+header nav ul{
+    float: left;
+}
+
+header nav ul li{
+    float: left;
+    list-style: none;
+    margin-right: 30px;
+    margin-bottom: 20px;
+}
+
+header nav ul li a{
+    font-family: arial;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    /*color: #111;*/
+    line-height: 63px;
+    transition: background 0.5s linear;
+}
+
+header nav ul li a:hover{
+    background-color: #e6e6ff;
+}
+
+.classafb{
+    height: 20%;
+    width: 20%;
+    margin: 5px;
+    border-radius: 3px;
+    border: 2px solid red;  
+
+}
+form{
+    padding-left:10px;
+    padding-bottom:10px;
+    font-weight: bold;  
+}
+
+input{
+    height: 30px;
+    margin: 5px;
+    padding: 2px;
+}
+/*            end opmaak button*/
+
+.klas{
+    display: flex;
+    flex-wrap: wrap;
+    /*    flex-direction: row;*/
+    /*    float: left;*/
+    /*background:red;*/
+    width: 100%;
+
+
+}
+
+img{
+    display: inline-block;
+    border: 2px solid red;
+    border-radius: 3px;
+    width: 20%;
+    height: 30%;
+    margin: 5px;
+    /*object-fit: contain*/
+    background: linear-gradient(rgba(128,128,128,0.3), rgba(0,0,128,0.7));
+}
+#imgbox{
+    padding:10px;
+}
+
+.subclass{
+    overflow: auto;
+    white-space: nowrap;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    /*    align-items: flex-start;*/
+    /*background: yellow;*/
+    width: 80%;
+    height: 600px;
+}
+
+
+
+/*opmaak 2de en 3de pagina*/
+
+.subtopnav{
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: "Arial", "Book Antiqua", Palatino, serif;
+    font-size: 25px;
+}
+.topnav {
+    width: 100%;
+    background-color: #333;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+
+.topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: "Arial", "Book Antiqua", Palatino, serif;
+    font-size: 25px;
+    transition: background 0.5s linear;
+}
+
+
+.topnav a:hover {
+    background-color: #cccccc;
+    color: black;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 5px;
+}
+
+.topnav a.active {
+    background-color: goldenrod;
+    color: white;
+} 
+.GroupAanwezigheid	{
+    display: inline-block;
+    background: linear-gradient(rgba(128,128,128,0.3), rgba(0,0,128,0.7));
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: white;
+    font-weight: bold;
+    border: 3px solid Indigo;
+    border-radius: 3px;
+    width: 15%;
+    margin: 5px;
+    object-fit: contain;
+    padding: 5px;    
+}
+
+
+.selector	{
+    display: inline-block;
+    color:red;
+    border: 3px solid Indigo;
+    border-radius: 3px;
+    height: 200px;
+    margin: 30px;
+    object-fit: contain
+}
+.GroupAanwezigheid img{
+    width: 93%;
+    Height: 180px;
+
+}
+p {
+/*    font*/
+    font-family:verdana;
+    padding-left:10px;
+}
+p:first-of-type {
+    font-size: 30px;
+    text-shadow: 2px 2px #FF0000;
+
+}
+
+input:focus {
+    background-color: lightblue;
+    color: red;
+}
