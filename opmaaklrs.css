@@ -229,7 +229,7 @@ input{
 
 }
 
-img{
+oldimg{
     display: inline-block;
     border: 2px solid red;
     border-radius: 3px;
@@ -243,7 +243,7 @@ img{
     padding:10px;
 }
 
-.subclass{
+.OLDsubclass {
     overflow: auto;
     white-space: nowrap;
     display: flex;
@@ -254,6 +254,17 @@ img{
     /*background: yellow;*/
     width: 80%;
     height: 600px;
+}
+.subclass {
+    overflow: auto;
+    white-space: nowrap;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    /*    align-items: flex-start;*/
+    /*background: yellow;*/
+   /* width: 80%;  */
 }
 
 
@@ -337,7 +348,7 @@ p {
     font-family:verdana;
     padding-left:10px;
 }
-p:first-of-type {
+oldp:first-of-type {
     font-size: 30px;
     text-shadow: 2px 2px #FF0000;
 

@@ -51,16 +51,10 @@ function getAbsentieCode( $pDescAbsentie)  {
 	}
 
 	function zetLeerlingenOpHetScherm($alleenAbsenteLeerlingen){
-
-		$sql = "SELECT * FROM `leerling`  ";
-//		$sql = "SELECT * FROM `leerling`  order by `schermvolgnr`";
-echo $sql;
+		$sql = "SELECT * FROM `leerling`  order by `schermvolgnr";
 		$conn = connectToDb();
 		$recordSet = $conn->query($sql);
-echo $recordSet;
 		if ($recordSet) {
-echo $recordSet;
-echo "62";
 			echo "<div id='thomas' class='klas' ondrop='drop(event,this)' ondragover='allowDrop(event)'> ";
 				while ($row = mysqli_fetch_array($recordSet)) {
 					if ($alleenAbsenteLeerlingen) {
