@@ -40,6 +40,7 @@ div.figure {
   margin: 0.5em;
   padding: 0.5em;
 }
+
 div.figure p {
   text-align: center;
   font-style: italic;
@@ -47,9 +48,6 @@ div.figure p {
   text-indent: 0;
 }
 
-oldimg.scaled {
-  width: 100%;
-}
 table {
     width: 100%;
     border-collapse: separate;
@@ -96,9 +94,6 @@ td  {
             $sql = "SELECT * FROM `leerling`";
             $conn = connectToDb();
             $result = $conn->query($sql);
-
-//            echo "<div class='klas'  id='klasID' ondrop='drop(event)' ondragover='allowDrop(event)'> ";
-
             echo "<div> <table>";
 			$rijTeller = 0;
 
@@ -114,26 +109,22 @@ td  {
 					echo "<tr>";
 				}	
 				if (leerlingIsVandaagNogNietAanwezigGeregistreerd($row['id'])) {
-//				echo "<td> <div class=figure > <p><img id = " . $row['id'] . " src=" . $row['foto'] . "   onclick='aanwezig(this)' draggable='true' ondragstart='drag(event)'><p></div>" . $row['naam'] . "</td>";
-				echo "<td> <img id = " . $row['id'] . " src=" . $row['foto'] ;
-				echo "   onclick='aanwezig(this)' draggable='true' ondragstart='drag(event)'><p id=naam >" .$row['naam'] . "</td>";
+					echo "<td> <img id = " . $row['id'] . " src=" . $row['foto'] ;
+					echo "   onclick='aanwezig(this)' ><p id=naam >" .$row['naam'] . "</td>";
 					} else {
 					echo "<td>  <img  style='opacity:0.4' id = " . $row['id'] . " src=" . $row['foto'] ;
-					echo "   onclick='aanwezig(this)' draggable='true' ondragstart='drag(event)'><p id=gryednaam >" . $row['naam'] . "</td>";
+					echo "   onclick='aanwezig(this)' ><p id=gryednaam >" . $row['naam'] . "</td>";
 				}
 			}
-			$rijTeller++;
-			if ($rijTeller > 3 ) {
-				$rijTeller = 1;
-				echo "</tr>";
-				}
+			echo "</tr>";
+			
 			
             echo "</table>";
 				
-                echo "<div class='subclass' id='subclass'ondrop='drop(event, this)' ondragover='allowDrop(event)'>";
-                echo "</div >";
-                echo "<div id='zoekvak' ondrop='drop(event,this)' ondragover='allowDrop(event)'class='zoek'>";
-				echo "</div >";
+            echo "<div class='subclass' id='subclass'ondrop='drop(event, this)' ondragover='allowDrop(event)'>";
+            echo "</div >";
+            echo "<div id='zoekvak' ondrop='drop(event,this)' ondragover='allowDrop(event)'class='zoek'>";
+			echo "</div >";
             ?>
 		</div >
 		<div class="button">

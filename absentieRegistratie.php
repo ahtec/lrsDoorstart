@@ -3,61 +3,135 @@ session_start();
 require_once './connection.php';
 require_once './functiesPHP.php';
 include_once 'header.php';
+
 ?>
 
 <html>
     <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="lrsscript.js"></script>
-		<style>
-#test{
-  position: absolute;
-     margin-left: 30%;
+	<link rel="stylesheet" type="text/css" href="opmaaklrs.css">
+	<meta charset="utf-8" />
+	<title> Leerlingen Absentie Registratie </title>
 
-}	
-
-		</style>
-<script>
-function afwezig(selectElement) {
-	//Function  werkt niet vanuit de js file
-	var parentDiv = selectElement.parentNode;
-	var leerlingID = parentDiv.id;	
-	var selectedIndexVanSelector = document.getElementById(selectElement.id).selectedIndex;
-	var absentieCodeUitSelect    = document.getElementById(selectElement.id).options[selectedIndexVanSelector].text;
-//	console.log(leerlingID);
-//	console.log(absentieCodeUitSelect);
-	$(selectElement).fadeTo("slow", 0.40);
-
-
-    $.post("storeAfwezigheid.php", {leerlingID: leerlingID , absentieCode: absentieCodeUitSelect}, function (data, status) {
-//			$.post("./registreerAanwezigheid.php",  function(data){                                          
-//    console.log(searchString);
-//			$(this).html(data);
-	console.log(data);
-	console.log(status);
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="lrsscript.js"></script>
 	
 
-    });
+	<script>
+		$(document).ready(function(){
+			$("header nav ul li a").hover(function() {
+				$(this).children("ul").fadeIn(500).animate({top: '-=10'}, 500, function() { });
+			}, function() {
+				$("ul li > ul").fadeOut(500).animate({top: '+=10'}, 500, function() { });
+		});
+
+		//	document.getElementById("demo").innerHTML ="Page path is: " + window.location.pathname;
+	
+	
+		});
+
+
+
+	function afwezig(selectElement) {
+		//Function  werkt niet vanuit de js file
+		var parentDiv = selectElement.parentNode;
+		var leerlingID = parentDiv.id;	
+		var selectedIndexVanSelector = document.getElementById(selectElement.id).selectedIndex;
+		var absentieCodeUitSelect    = document.getElementById(selectElement.id).options[selectedIndexVanSelector].text;
+	//	console.log(leerlingID);
+	//	console.log(absentieCodeUitSelect);
+		$(selectElement).fadeTo("slow", 0.40);
+
+
+		$.post("storeAfwezigheid.php", {leerlingID: leerlingID , absentieCode: absentieCodeUitSelect}, function (data, status) {
+	//			$.post("./registreerAanwezigheid.php",  function(data){                                          
+	//    console.log(searchString);
+	//			$(this).html(data);
+		console.log(data);
+		console.log(status);
+		
+
+		});
+	}
+
+	</script>
+
+<style>			
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 15px 50px;
+	border: 1px solid white;
+    border-radius: 10px;
 }
 
-</script>
+img {
+  width: 100%;
 
-        <link rel="stylesheet" type="text/css" href="opmaaklrs.css">
-        <style>
+}
 
-        </style>
-        <meta charset="utf-8" />
-        <title> Leerlingen Absentie Registratie </title>
+td  {
+    vertical-align: top;
+    border-spacing: 15px 50px;
+	border: 1px solid white;
+    border-radius: 10px;
+
+}
+
+#naam {
+	text-align:center;
+	 vertical-align: text-top;
+	font-size: 20px;
+	font-family: arial;
+		color: white;
+}
+
+#inverse {
+		color: red;
+}
+
+		</style>
+		
     </head>
     <body>
-        <div class="topnav">
-            <header class="subtopnav"> Absente leerlingen  </header>
-        </div>
-<!--        <nav>
+	
 
-        </nav>-->
 
-    <?php zetLeerlingenOpHetScherm(TRUE);    ?>
+    <?php 
+
+	$sql = "SELECT * FROM `leerling`";
+	$conn = connectToDb();
+	$result = $conn->query($sql);
+	echo "<div> <table>";
+	$rijTeller = 1;
+
+	while ($row = mysqli_fetch_array($result)) {
+		echo "\n";
+		if (leerlingIsVandaagNogNietAanwezigGeregistreerd($row['id'])) {
+			if ($rijTeller == 1 ) {
+				echo "<tr>";
+			}	
+			echo "<td> <img id = " . $row['id'] . " src=" . $row['foto'] ;
+			echo " onclick='aanwezig(this)' ><p id=naam >" .$row['naam'] . "</td>";
+			$rijTeller++;
+			if ($rijTeller > 4 ) {
+				$rijTeller = 1;
+				echo "</tr>";
+			}
+
+		} 
+	}
+	if ($rijTeller <> 1 ) {
+		echo "</tr>";
+	}
+	
+	echo "</table>";
+		
+	echo "<div class='subclass' id='subclass'ondrop='drop(event, this)' ondragover='allowDrop(event)'>";
+	echo "</div >";
+	echo "<div id='zoekvak' ondrop='drop(event,this)' ondragover='allowDrop(event)'class='zoek'>";
+	echo "</div >";
+
+	?>
 
         </div>
         <footer>
