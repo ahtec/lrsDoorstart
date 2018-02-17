@@ -56,9 +56,9 @@
 	maakMenu();
 
     $("header nav ul li a").hover(function() {
-            $(this).children("ul").fadeIn(500).animate({top: '-=10'}, 500, function() { });
+            $(this).children("ul").fadeIn(400).animate({top: '-=10'}, 400, function() { });
         }, function() {
-            $("ul li > ul").fadeOut(500).animate({top: '+=10'}, 500, function() { });
+            $("ul li > ul").fadeOut(400).animate({top: '+=10'}, 400, function() { });
     });
 });
  </script>

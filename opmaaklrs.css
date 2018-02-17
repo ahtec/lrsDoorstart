@@ -127,7 +127,8 @@ button:hover {
 body {
     padding-left: 20px;
     padding-right: 20px;
-    background: linear-gradient(rgba(0,0,128,0.7), rgba(128,128,128,0.3));
+	
+    background: #a3a375;
 
 }
 
