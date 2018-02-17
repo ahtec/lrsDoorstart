@@ -29,43 +29,44 @@
 			
 			var ulTag = document.createElement("ul");
 			menuBalk.appendChild(ulTag);
-			var liTag = document.createElement("li");
-			ulTag.appendChild(liTag);
+				var liTag = document.createElement("li");
+					var uitkomst = geefAtag("index.php",huidigePHP,"Hoofdpagina");
+					liTag.appendChild(uitkomst);
+				ulTag.appendChild(liTag);
 
-			var aTag = document.createElement("a");
-			
-			aTag.setAttribute("href","index.php");
-			aTag.innerHTML="Hoofdpagina";
-			aTag.style.background = "black";
-			aTag.style.color = "white";
-			
-            
-			liTag.appendChild(aTag);
-			
 			var ulTag = document.createElement("ul");
 			menuBalk.appendChild(ulTag);
-			var liTag = document.createElement("li");
-			ulTag.appendChild(liTag);
-			
-			var aTag = document.createElement("a");
-			aTag.setAttribute("href","opvragenAanwezigheid.php");
-			aTag.innerHTML="Opvragen aanwezigheid";
-			liTag.appendChild(aTag);
-			
+				var liTag = document.createElement("li");
+					var uitkomst = geefAtag("opvragenAanwezigheid.php",huidigePHP,"Opvragen aanwezigheid");
+					liTag.appendChild(uitkomst);
+				ulTag.appendChild(liTag);
+
+
 			var ulTag = document.createElement("ul");
 			menuBalk.appendChild(ulTag);
-			var liTag = document.createElement("li");
-			ulTag.appendChild(liTag);
-			
-			var aTag = document.createElement("a");
-			aTag.setAttribute("href","absentieRegistratie.php");
-			aTag.innerHTML="Absentie registratie";
-			liTag.appendChild(aTag);
+				var liTag = document.createElement("li");
+					var uitkomst = geefAtag("absentieRegistratie.php",huidigePHP,"Absentie registratie");
+					liTag.appendChild(uitkomst);
+				ulTag.appendChild(liTag);
+
 			
 			
 			
 			console.log(menuVar);
+			
      }
+	 
+	function geefAtag(menuItem,huidigePHP,menuText){
+		var aTag = document.createElement("a");
+		aTag.setAttribute("href",menuItem);
+		aTag.innerHTML = menuText;
+		if (menuItem == huidigePHP ) {
+			aTag.style.background = "black";
+			aTag.style.color = "white";
+		}
+		return(aTag);
+	}
+
 
 	maakMenu();
 
