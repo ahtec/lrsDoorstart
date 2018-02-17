@@ -8,52 +8,37 @@
 	$(document).ready(function(){
 
 		function maakMenu() {
-//			alert("In menumaaker");
-// alert(window.location.pathname);
-//  /lrsDoorstart/absentieRegistratie.php
 			var deelNamen = window.location.pathname.split("/");
-//			console.log(deelNamen);
 
 			var huidigePHP = deelNamen.pop();
 			if (huidigePHP == "") {
-//				alert("In leeg");
 				huidigePHP = "index.php";
 			}
-			console.log(huidigePHP);
 
+			var menuItems = [
+				"index.php",
+				"opvragenAanwezigheid.php",
+				"absentieRegistratie.php"];
+			
+			var menuOmschrijvingen = [
+				"Wie is er",
+				"Opvragen",
+				"Waarom is i er niet"];
 
 			var menuVar = document.getElementById("menuHierAan");
 			var menuBalk = document.createElement("div");
 			menuBalk.setAttribute("class", "main-wrapper");
 			menuVar.appendChild(menuBalk);
-			
-			var ulTag = document.createElement("ul");
-			menuBalk.appendChild(ulTag);
+
+			for (i = 0; i < menuItems.length; i++) { 
+				//text += cars[i] + "<br>";
+				var ulTag = document.createElement("ul");
+				menuBalk.appendChild(ulTag);
 				var liTag = document.createElement("li");
-					var uitkomst = geefAtag("index.php",huidigePHP,"Hoofdpagina");
-					liTag.appendChild(uitkomst);
+				var uitkomst = geefAtag(menuItems[i],huidigePHP,menuOmschrijvingen[i]);
+				liTag.appendChild(uitkomst);
 				ulTag.appendChild(liTag);
-
-			var ulTag = document.createElement("ul");
-			menuBalk.appendChild(ulTag);
-				var liTag = document.createElement("li");
-					var uitkomst = geefAtag("opvragenAanwezigheid.php",huidigePHP,"Opvragen aanwezigheid");
-					liTag.appendChild(uitkomst);
-				ulTag.appendChild(liTag);
-
-
-			var ulTag = document.createElement("ul");
-			menuBalk.appendChild(ulTag);
-				var liTag = document.createElement("li");
-					var uitkomst = geefAtag("absentieRegistratie.php",huidigePHP,"Absentie registratie");
-					liTag.appendChild(uitkomst);
-				ulTag.appendChild(liTag);
-
-			
-			
-			
-			console.log(menuVar);
-			
+			}
      }
 	 
 	function geefAtag(menuItem,huidigePHP,menuText){
