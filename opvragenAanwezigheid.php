@@ -73,7 +73,7 @@ td  {
         echo "<a href=  opvragenAanwezigheid.php?absentieCode=999 >Afwezig</a>";
         echo "</div>";
     ?>   
-    <div> <table class="klas">
+    <div  class="klas">
         <?php
         if ($_REQUEST) {
             if (isset($_REQUEST['absentieCode'])) {
@@ -103,34 +103,24 @@ td  {
 
         $vorigID = 9999999;
         while ($row = mysqli_fetch_array($result)) {
-
             if ($vorigID != $row['leerlingID']) {
                 if ($vorigID != 9999999) {
                     echo "</div >";
                 }
-				$rijTeller++;
-//				echo $rijTeller;
-				echo "\n";
-				if ($rijTeller > 4 ) {
-					$rijTeller = 1;
-					echo "</tr>";
-					}
-				if ($rijTeller == 1 ) {
-					echo "<tr>";
-				}	
 				
+                echo " <div    class='GroupAanwezigheid' > ";
 //                echo " <td><div    class='GroupAanwezigheid' id='afbContainer'> ";
-                echo " <td> ";
+//                echo " <td> ";
                 echo "<img id = " . $row['id'] . " src=" . $row['foto'] . " width=100px  > \n";
                 echo "<p id=naam  class='leerling'>" . $row['naam'] . " </p> ";
                 $vorigID = $row['leerlingID'];
             }
-            echo "<p>" . $row['datum'] . " tijd " . $row['tijd'] . " " . $row['signalering'] . " </p>\n";
+            echo "<p>" . $row['datum'] . " om " . $row['tijd'] . " " . $row['signalering'] . " </p>\n";
         }
        echo "</div ";     
-        echo "</td>";     
+//        echo "</td>";     
         ?>    
 
-    </table>
+    </div>
 </body			
 
