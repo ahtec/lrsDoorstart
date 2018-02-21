@@ -312,17 +312,18 @@ oldimg{
 
 .topnav a.active {
     background-color: goldenrod;
-    color: white;
+   color: white;
+
 } 
 .GroupAanwezigheid	{
     display: inline-block;
-<!----    background: linear-gradient(rgba(128,128,128,0.3), rgba(0,0,128,0.7));   ---->
+<!----    background: linear-gradient(rgba(128,128,128,0.3), rgba(0,0,128,0.7));  
+---->
     overflow: hidden;
     text-overflow: ellipsis;
-    color: white;
     border: 1px solid white;
     border-radius: 10px;
-    width: 16%;
+    width: 20%;
     margin: 5px;
     object-fit: contain;
 }
