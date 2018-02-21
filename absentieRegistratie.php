@@ -5,30 +5,14 @@ require_once './functiesPHP.php';
 include_once 'header.php';
 
 ?>
-
 <html>
     <head>
 	<link rel="stylesheet" type="text/css" href="opmaaklrs.css">
 	<meta charset="utf-8" />
 	<title> Leerlingen Absentie Registratie </title>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="lrsscript.js"></script>
-	
-
 	<script>
-		$(document).ready(function(){
-			$("header nav ul li a").hover(function() {
-				$(this).children("ul").fadeIn(500).animate({top: '-=10'}, 500, function() { });
-			}, function() {
-				$("ul li > ul").fadeOut(500).animate({top: '+=10'}, 500, function() { });
-		});
-
-		//	document.getElementById("demo").innerHTML ="Page path is: " + window.location.pathname;
-	
-	
-		});
-
 
 
 	function afwezig(selectElement) {
@@ -111,7 +95,8 @@ td  {
 				echo "<tr>";
 			}	
 			echo "<td> <img id = " . $row['id'] . " src=" . $row['foto'] ;
-			echo " onclick='aanwezig(this)' ><p id=naam >" .$row['naam'] . "</td>";
+			echo " onclick='myPopup_absentie(this)' ><p id=naam >" .$row['naam'] . "</td>";
+			
 			$rijTeller++;
 			if ($rijTeller > 4 ) {
 				$rijTeller = 1;
@@ -135,7 +120,7 @@ td  {
 
         </div>
         <footer>
-            ITPH project mede mogelijk gemaakt door: Thomas, Bas, Gerard en Derk
+                       Aanwezigheids registratie versie 2.0
         </footer>
     </body>
 </html>

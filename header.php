@@ -41,19 +41,19 @@
 			}
      }
 	 
-	function geefAtag(menuItem,huidigePHP,menuText){
-		var aTag = document.createElement("a");
-		aTag.setAttribute("href",menuItem);
-		aTag.innerHTML = menuText;
-		if (menuItem == huidigePHP ) {
-			aTag.style.background = "black";
-			aTag.style.color = "white";
+		function geefAtag(menuItem,huidigePHP,menuText){
+			var aTag = document.createElement("a");
+			aTag.setAttribute("href",menuItem);
+			aTag.innerHTML = menuText;
+			if (menuItem == huidigePHP ) {
+				aTag.style.background = "black";
+				aTag.style.color = "white";
+			}
+			return(aTag);
 		}
-		return(aTag);
-	}
 
 
-	maakMenu();
+		maakMenu();
 
     $("header nav ul li a").hover(function() {
             $(this).children("ul").fadeIn(400).animate({top: '-=10'}, 400, function() { });

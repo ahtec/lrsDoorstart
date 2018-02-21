@@ -107,6 +107,74 @@ function aanwezig(leerling) {
 // popup absentie
 function myPopup_absentie(img) {
     var afbinhoud = img;
+	console.log(img);
+
+    var popup = document.createElement("div");
+    popup.setAttribute("id", "test")
+
+    var form = document.createElement("form");
+    form.setAttribute("action", "storeAfwezigheid.php");
+    form.setAttribute("id", "myFormAbsent");
+    form.setAttribute("method", "get");
+    form.setAttribute("enctype", "multipart/form-data");
+
+    var id = document.createElement("input");
+    id.setAttribute("type", "hidden");
+    id.setAttribute("name", "leerlingID");
+    id.setAttribute("value", afbinhoud.id);
+
+    var textbox = document.createElement("p");
+    var innerbox = document.createTextNode("Selecteer reden");
+    textbox.appendChild(innerbox);
+
+    //submitknop
+    var submit = document.createElement("input");
+    submit.setAttribute("type", "button");
+    submit.setAttribute("value", "submit");
+    submit.setAttribute("id", "submitKnop");
+    submit.addEventListener("click", mySubmitAbsent);
+
+    var afb = document.createElement("img");
+    afb.setAttribute("class", "classafb");
+    afb.setAttribute("id", "afb_absentie");
+    afb.setAttribute("src", afbinhoud.src);
+
+    var imgbox = document.createElement("div");
+    imgbox.setAttribute("id", "imgbox");
+    //    imgbox.setAttribute("width","50px");
+    imgbox.appendChild(afb);
+
+
+    //sluitknop
+    var sluitknop = document.createElement("button");
+    var t = document.createTextNode("X");
+    sluitknop.setAttribute("id", "sluitknop");
+    sluitknop.appendChild(t);
+    sluitknop.addEventListener("click", cancelPopup);
+
+    //droplist
+    var select = document.createElement("select");
+    select.setAttribute("name", "absentieID");
+    loadDoc(select);
+
+    //toevoegen child aan parent 
+    form.appendChild(imgbox);
+    form.appendChild(id);
+    form.appendChild(textbox);
+    form.appendChild(select);
+
+    popup.appendChild(sluitknop);
+    popup.appendChild(form);
+
+    popup.appendChild(submit);
+    popup.setAttribute("class", "popupnaam");
+
+    // **********   var popupvak = document.getElementById("klasID");
+    var popupvak = document.getElementById("subclass");
+    popupvak.appendChild(popup);
+}
+function oldmyPopup_absentie(img) {
+    var afbinhoud = img;
 
     var popup = document.createElement("div");
     popup.setAttribute("id", "test")
@@ -169,8 +237,8 @@ function myPopup_absentie(img) {
     popup.setAttribute("class", "popupnaam");
 	
 // **********   var popupvak = document.getElementById("klasID");
-    var popupvak = document.getElementById("afbContainer");
-    popupvak.appendChild(popup);
+//    var popupvak = document.getElementById("afbContainer");
+//    popupvak.appendChild(popup);
 }
 //submit form in popup
 function mySubmit() {
