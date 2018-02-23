@@ -30,7 +30,7 @@ table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 15px 50px;
-	border: 1px solid white;
+    border: 1px solid white;
     border-radius: 10px;
 }
 
@@ -63,6 +63,18 @@ td  {
 	color: black;
 }
 
+.GroupAanwezigheid	{
+    /*display: inline-block;*/
+/*<!----    background: linear-gradient(rgba(128,128,128,0.3), rgba(0,0,128,0.7));*/  
+/*---->*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: 1px solid white;
+    border-radius: 10px;
+    width: 24%;
+    margin: 5px;
+    object-fit: contain;
+}
 
 
 		</style>
