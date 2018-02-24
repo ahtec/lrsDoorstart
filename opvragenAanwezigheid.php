@@ -118,7 +118,6 @@ include_once 'header.php';
             $vorigID = 9999999;
             while ($row = mysqli_fetch_array($result)) {
                 if ($vorigID != $row['leerlingID']) {
-
                     if ($vorigID != 9999999) {
 //                        echo "</div >";
                         echo "</td>";
@@ -132,11 +131,7 @@ include_once 'header.php';
                     if ($rijTeller == 1) {
                         echo "<tr>";
                     }
-
-//                    echo " <div    class='GroupAanwezigheid' > ";
-
                     echo " <td class='GroupAanwezigheid' id='afbContainer'> ";
-//                echo " <td> ";
                     echo "<img id = " . $row['id'] . " src=" . $row['foto'] . " width=100px  > \n";
                     echo "<p id=naam  class='leerling'>" . $row['naam'] . " </p> ";
                     $vorigID = $row['leerlingID'];

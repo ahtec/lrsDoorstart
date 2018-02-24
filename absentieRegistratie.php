@@ -73,6 +73,28 @@ td  {
 		color: red;
 }
 
+img {
+    max-width: 300px;
+    min-width: 100px;
+}
+#flexboxAbsentie {
+    display: flex;
+    /*flex-direction:row;*/
+ display: flexbox;
+  flex-wrap:wrap;
+    border: 1px solid white;
+    border-radius: 10px;
+margin-top: 100px;
+ min-height: 15px;
+ }
+ 
+#flexboxAbsentie >div {
+    max-width: 400px;
+    max-height: 400px;
+    border: 1px solid white;
+    border-radius: 10px;
+    margin: 5px;  
+}
 		</style>
 		
     </head>
@@ -85,42 +107,42 @@ td  {
 	$sql = "SELECT * FROM `leerling`";
 	$conn = connectToDb();
 	$result = $conn->query($sql);
-	echo "<div> <table>";
-	$rijTeller = 1;
+	echo "<div id=flexboxAbsentie>";
+//	$rijTeller = 1;
 
 	while ($row = mysqli_fetch_array($result)) {
 		echo "\n";
 		if (leerlingIsVandaagNogNietAanwezigGeregistreerd($row['id'])) {
-			if ($rijTeller == 1 ) {
-				echo "<tr>";
-			}	
-			echo "<td> <img id = " . $row['id'] . " src=" . $row['foto'] ;
-			echo " onclick='myPopup_absentie(this)' ><p id=naam >" .$row['naam'] . "</td>";
+//			if ($rijTeller == 1 ) {
+//				echo "<tr>";
+//			}	
+			echo "<div> <img id = " . $row['id'] . " src=" . $row['foto'] ;
+			echo " onclick='myPopup_absentie(this)' ><p id=naam >" .$row['naam'] . "</div>";
 			
-			$rijTeller++;
-			if ($rijTeller > 4 ) {
-				$rijTeller = 1;
-				echo "</tr>";
-			}
+//			$rijTeller++;
+//			if ($rijTeller > 4 ) {
+//				$rijTeller = 1;
+//				echo "</div>";
+//			}
 
 		} 
 	}
-	if ($rijTeller <> 1 ) {
-		echo "</tr>";
-	}
-	
-	echo "</table>";
+//	if ($rijTeller <> 1 ) {
+//		echo "</tr>";
+//	}
+//	
+	echo "</div>";
 		
-	echo "<div class='subclass' id='subclass'ondrop='drop(event, this)' ondragover='allowDrop(event)'>";
-	echo "</div >";
-	echo "<div id='zoekvak' ondrop='drop(event,this)' ondragover='allowDrop(event)'class='zoek'>";
-	echo "</div >";
+//	echo "<div class='subclass' id='subclass'ondrop='drop(event, this)' ondragover='allowDrop(event)'>";
+//	echo "</div >";
+//	echo "<div id='zoekvak' ondrop='drop(event,this)' ondragover='allowDrop(event)'class='zoek'>";
+//	echo "</div >";
 
 	?>
 
         </div>
-        <footer>
+<!--        <footer>
                        Aanwezigheids registratie versie 2.0
-        </footer>
+        </footer>-->
     </body>
 </html>

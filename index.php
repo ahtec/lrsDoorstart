@@ -130,8 +130,8 @@ include_once 'header.php';
     <div class="button">
         <button id="newstudent" type="submit" onclick="myPopup()" value="Leerling opvoeren" >Opvoeren Leerling</button> 
     </div>
-    <footer>
+<!--    <footer>
         ITPH project mede mogelijk gemaakt door: Thomas, Bas, Gerard en Derk
-    </footer>
+    </footer>-->
 </body>
 </html> 
