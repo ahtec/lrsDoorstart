@@ -12,14 +12,13 @@ include_once 'header.php';
         <script src="lrsscript.js"></script>
         <script>
             function aanwezig(leerling) {
-                //Function voor het registeren van de leerling, werkt niet vanuit de js file
                 console.log(leerling.id);
 
                 $.post("registreerAanwezigheid.php", {leerlingID: leerling.id}, function (data, status) {
                     //			$.post("./registreerAanwezigheid.php",  function(data){                                          
                     //				alert("Data: " + data + "\nStatus: " + status);
                     //				$('#somediv').html(data);
-                    console.log(leerling);
+//                    console.log(leerling);
                     var temp = window.getComputedStyle(leerling).getPropertyValue("opacity");
                     console.log(temp);
                     if (temp == 1) {
@@ -121,15 +120,15 @@ include_once 'header.php';
 
         echo "</table>";
 
-        echo "<div class='subclass' id='subclass'ondrop='drop(event, this)' ondragover='allowDrop(event)'>";
-        echo "</div >";
-        echo "<div id='zoekvak' ondrop='drop(event,this)' ondragover='allowDrop(event)'class='zoek'>";
-        echo "</div >";
+//        echo "<div class='subclass' id='subclass'ondrop='drop(event, this)' ondragover='allowDrop(event)'>";
+//        echo "</div >";
+//        echo "<div id='zoekvak' ondrop='drop(event,this)' ondragover='allowDrop(event)'class='zoek'>";
+//        echo "</div >";
         ?>
     </div >
-    <div class="button">
+<!--    <div class="button">
         <button id="newstudent" type="submit" onclick="myPopup()" value="Leerling opvoeren" >Opvoeren Leerling</button> 
-    </div>
+    </div>-->
 <!--    <footer>
         ITPH project mede mogelijk gemaakt door: Thomas, Bas, Gerard en Derk
     </footer>-->

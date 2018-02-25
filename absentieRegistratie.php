@@ -35,7 +35,7 @@ include_once 'header.php';
 //
 
 
-            function afwezig(leerlingID,absentieCodeUitSelect ) {
+            function afwezig(leerlingID, absentieCodeUitSelect, pElement) {
 //                console.log(selectElement);
                 //Function  werkt niet vanuit de js file
 //                var parentDiv = selectElement.parentNode;
@@ -44,7 +44,7 @@ include_once 'header.php';
 
 //                var leerlingID = selectElement.id.value;
                 console.log(leerlingID);
-                
+
 //                var leerlingID = parentDiv.id;
 //                var selectedIndexVanSelector = document.getElementById(selectElement.id).selectedIndex;
 //                var absentieCodeUitSelect = document.getElementById(selectElement.id).options[selectedIndexVanSelector].text;
@@ -53,13 +53,22 @@ include_once 'header.php';
 //                $(selectElement).fadeTo("slow", 0.40);
 
 
-                $.post("storeAfwezigheid.php", {leerlingID: leerlingID, absentieCode: absentieCodeUitSelect}, function (data, status) {
-                    //			$.post("./registreerAanwezigheid.php",  function(data){                                          
-                    //    console.log(searchString);
-                    //			$(this).html(data);
-                    console.log(data);
-                    console.log(status);
-                });
+                $.post("storeAfwezigheid.php", {
+                    leerlingID: leerlingID,
+                    absentieCode: absentieCodeUitSelect},
+                        function (data, status) {
+//                            console.log(data);
+//                            console.log(status);
+                            if (status == "success") {
+                                leerlingImg = document.getElementById(leerlingID);
+                                console.log(pElement);
+                                $(leerlingImg).fadeTo("slow", 0.40);
+                                pElement.style.background = "black";
+                                pElement.style.color = "white";
+
+
+                            }
+                        });
             }
 
 
@@ -143,16 +152,15 @@ include_once 'header.php';
             $sql = "SELECT * FROM `absentie` ";
             $erinResultSet = $ParamConn->query($sql);
             for ($x = 0; $x < $erinResultSet->num_rows; $x++) {
-                $row          = $erinResultSet->fetch_assoc();
+                $row = $erinResultSet->fetch_assoc();
 //                echo $row['signalering'];
-                $sg           = $row['signalering'];
+                $sg = $row['signalering'];
                 $absentieCode = $row['signalering'];
 //                $eruit .= "<a href=  opvragenAanwezigheid.php?absentieCode=". $selectidname. "> ".$sg . " </a>";
 //                $eruit .= "<button onclick='test(" .$selectidname. " ," . $sg. " )' >"   . $sg . " </button>";
 //                $eruit .= "<button onclick='test($selectidname ,'$sg')' >"   . $sg . " </button>";
-                $eruit .= sprintf("<button onclick=afwezig(%s,'%s') >%s  </button>",$selectidname,$absentieCode,$sg);
-
-                }
+                $eruit .= sprintf("<button onclick=afwezig(%s,'%s',this) >%s  </button>", $selectidname, $absentieCode, $sg);
+            }
 
             return $eruit;
         }
