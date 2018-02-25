@@ -57,6 +57,7 @@ include_once 'header.php';
 
             img {
                 width: 100%;
+                border-radius: 10px 10px 0px 0px;
 
             }
 

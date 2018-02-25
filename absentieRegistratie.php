@@ -91,7 +91,10 @@ include_once 'header.php';
             }
 
             img {
+                max-width: 300px;
+                min-width: 100px;
                 width: 100%;
+                border-radius: 10px 10px 0px 0px;
 
             }
 
@@ -115,10 +118,6 @@ include_once 'header.php';
                 color: red;
             }
 
-            img {
-                max-width: 300px;
-                min-width: 100px;
-            }
             #flexboxAbsentie {
                 display: flex;
                 /*flex-direction:row;*/
@@ -131,8 +130,8 @@ include_once 'header.php';
             }
 
             #flexboxAbsentie >div {
-                max-width: 400px;
-                max-height: 400px;
+                max-width: 300px;
+                /*max-height: 400px;*/
                 border: 1px solid white;
                 border-radius: 10px;
                 margin: 5px;  
