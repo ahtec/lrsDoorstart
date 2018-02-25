@@ -17,7 +17,7 @@ require_once './functiesPHP.php';
 	$huidigeDatum = date("Y-m-d");
 	$huidigeTijd  = date("Hi");
 	$conn = connectToDb();
-	$absentieCode =  getAbsentieCode($_REQUEST['absentieID']);
+	$absentieCode =  getAbsentieCode($_REQUEST['absentieCode']);
 	
 	
 	$sql = "SELECT * FROM aanwezigheid where `leerling_id` = ".$_REQUEST['leerlingID'] .
@@ -56,7 +56,7 @@ require_once './functiesPHP.php';
 		}
 	}
 	$conn->close();
-	header("Location: absentieRegistratie.php");
+//	header("Location: absentieRegistratie.php");
 //	return($eruit);
 		
 

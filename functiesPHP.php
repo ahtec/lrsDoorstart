@@ -99,21 +99,7 @@ function getAbsentieCode( $pDescAbsentie)  {
             return $eruit; 
         }
 
-        function createButons($selectidname) {
-			$eruit = "";
-			$ParamConn = connectToDb();
-            $sql           = "SELECT * FROM `absentie` ";
-            $erinResultSet = $ParamConn->query($sql);
-            for ($x = 0; $x < $erinResultSet->num_rows; $x++) {
-                $row = $erinResultSet->fetch_assoc();  
-//				echo $row['signalering'];
-				$sg=$row['signalering'];
-				$eruit .= "<a href=  opvragenAanwezigheid.php?absentieCode=". $sg. "> ".$sg . " </a>";
-			}
-
-            return $eruit; 
-        }
-
+ 
 	
 	
 	

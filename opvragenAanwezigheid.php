@@ -81,8 +81,24 @@ include_once 'header.php';
 
     <body>
         <?php
+        function createButons($selectidname) {
+			$eruit = "";
+			$ParamConn = connectToDb();
+            $sql           = "SELECT * FROM `absentie` ";
+            $erinResultSet = $ParamConn->query($sql);
+            for ($x = 0; $x < $erinResultSet->num_rows; $x++) {
+                $row = $erinResultSet->fetch_assoc();  
+//                echo $row['signalering'];
+                $sg=$row['signalering'];
+                $eruit .= "<a href=  opvragenAanwezigheid.php?absentieCode=". $sg. "> ".$sg . " </a>";
+            }
+
+            return $eruit; 
+        }
+
         echo "<div class='topnav' >" . createButons("test");
         echo "<a href=  opvragenAanwezigheid.php?absentieCode=999 >Afwezig</a>";
+        echo "<a href=  opvragenAanwezigheid.php?absentieCode=900 >Vandaag</a>";
         echo "</div>";
         ?>   
         <div  class="klas">
