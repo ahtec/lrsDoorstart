@@ -99,7 +99,6 @@ include_once 'header.php';
 
         while ($row = mysqli_fetch_array($result)) {
             $rijTeller++;
-//				echo $rijTeller;
             echo "\n";
             if ($rijTeller > 4) {
                 $rijTeller = 1;
@@ -109,9 +108,8 @@ include_once 'header.php';
                 echo "<tr>";
             }
 
-            $absentieID = leerlingIsVandaagNogNietAanwezigGeregistreerd($row['id']);
-             if  ($absentieID == ""){      
-//            if (leerlingIsVandaagNogNietAanwezigGeregistreerd($row['id'])) {
+            $absentieSignalering = geefAbsentieSignalering($row['id']);
+			if  ($absentieSignalering == ""){      
                 echo "<td> <img id = " . $row['id'] . " src=" . $row['foto'];
                 echo "   onclick='aanwezig(this)' ><p id=naam >" . $row['naam'] . "</td>";
             } else {
@@ -128,24 +126,38 @@ include_once 'header.php';
 //        echo "</div >";
 //        echo "<div id='zoekvak' ondrop='drop(event,this)' ondragover='allowDrop(event)'class='zoek'>";
 //        echo "</div >";
-        function leerlingIsVandaagNogNietAanwezigGeregistreerd($paramLeerlingID) {
+//*********************************************************************************
+        function geefAbsentieSignalering($paramLeerlingID) {
             $eruit = "";
             $huidigeDatum = date("Y-m-d");
             $huidigeTijd = date("Hi");
             $conn = connectToDb();
-            $sql = "SELECT * , `leerling`.`id` as `leerlingID`  FROM `aanwezigheid` JOIN  `leerling`  on  `leerling`.`id` =  `aanwezigheid`.`leerling_id` ";
+/*             $sql = "SELECT * , `leerling`.`id` as `leerlingID`  FROM `aanwezigheid` JOIN  `leerling`  on  `leerling`.`id` =  `aanwezigheid`.`leerling_id` ";
             $sql = $sql . " JOIN  `absentie`  on  `absentie`.`id` =  `aanwezigheid`.`absentiecode`";
-            $sql .= sprintf(" where `leerlingID` ='%s' ", $paramLeerlingID);
+            $sql .= sprintf(" where `leerling`.`id` ='%s' ", $paramLeerlingID);
+ */
+			//$sql = "SELECT * , `leerling`.`id` as `leerlingID`  FROM `aanwezigheid` JOIN  `leerling`  on  `leerling`.`id` =  `aanwezigheid`.`leerling_id` ";
+			//$sql = $sql . " JOIN  `absentie`  on  `absentie`.`id` =  `aanwezigheid`.`absentiecode`";
+			//$sql .= sprintf(" where `leerling`.`id` ='%s' ", $paramLeerlingID);
+			$huidigeDatum = date("Y-m-d");
+			$huidigeTijd  = date("Hi");
+			$conn = connectToDb();
+			$sql = "SELECT `absentie`.`signalering`  FROM aanwezigheid JOIN  `absentie`  on  `absentie`.`id` =  `aanwezigheid`.`absentiecode`";
+			$sql .=	 " where `leerling_id` = ".$paramLeerlingID." and `datum` = '$huidigeDatum'" ;
+
 
 //    $sql = "SELECT * FROM aanwezigheid where `leerling_id` = " . $paramLeerlingID .
 //            " and datum = '$huidigeDatum'";
-//            echo $sql;
+             echo "<br>".$sql;
             $result = $conn->query($sql);
             if ($result) {
                 $row = mysqli_fetch_array($result);
-                if (isset($row['leerlingID'])) {
-//				echo " 56 ";
-                    $eruit = false;
+                if (isset($row['leerling_id'])) {
+
+
+
+
+$eruit = false;
                 } else {
                     //echo " 59 ";
                     $eruit = true;
