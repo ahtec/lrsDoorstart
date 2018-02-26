@@ -108,7 +108,10 @@ include_once 'header.php';
             if ($rijTeller == 1) {
                 echo "<tr>";
             }
-            if (leerlingIsVandaagNogNietAanwezigGeregistreerd($row['id'])) {
+
+            $absentieID = leerlingIsVandaagNogNietAanwezigGeregistreerd($row['id']);
+             if  ($absentieID == ""){      
+//            if (leerlingIsVandaagNogNietAanwezigGeregistreerd($row['id'])) {
                 echo "<td> <img id = " . $row['id'] . " src=" . $row['foto'];
                 echo "   onclick='aanwezig(this)' ><p id=naam >" . $row['naam'] . "</td>";
             } else {
@@ -125,13 +128,43 @@ include_once 'header.php';
 //        echo "</div >";
 //        echo "<div id='zoekvak' ondrop='drop(event,this)' ondragover='allowDrop(event)'class='zoek'>";
 //        echo "</div >";
+        function leerlingIsVandaagNogNietAanwezigGeregistreerd($paramLeerlingID) {
+            $eruit = "";
+            $huidigeDatum = date("Y-m-d");
+            $huidigeTijd = date("Hi");
+            $conn = connectToDb();
+            $sql = "SELECT * , `leerling`.`id` as `leerlingID`  FROM `aanwezigheid` JOIN  `leerling`  on  `leerling`.`id` =  `aanwezigheid`.`leerling_id` ";
+            $sql = $sql . " JOIN  `absentie`  on  `absentie`.`id` =  `aanwezigheid`.`absentiecode`";
+            $sql .= sprintf(" where `leerlingID` ='%s' ", $paramLeerlingID);
+
+//    $sql = "SELECT * FROM aanwezigheid where `leerling_id` = " . $paramLeerlingID .
+//            " and datum = '$huidigeDatum'";
+//            echo $sql;
+            $result = $conn->query($sql);
+            if ($result) {
+                $row = mysqli_fetch_array($result);
+                if (isset($row['leerlingID'])) {
+//				echo " 56 ";
+                    $eruit = false;
+                } else {
+                    //echo " 59 ";
+                    $eruit = true;
+                }
+            } else {
+//			echo " 63 ";
+
+                $eruit = true;
+            }
+            $conn->close();
+            return($eruit);
+        }
         ?>
     </div >
-<!--    <div class="button">
-        <button id="newstudent" type="submit" onclick="myPopup()" value="Leerling opvoeren" >Opvoeren Leerling</button> 
-    </div>-->
-<!--    <footer>
-        ITPH project mede mogelijk gemaakt door: Thomas, Bas, Gerard en Derk
-    </footer>-->
+    <!--    <div class="button">
+            <button id="newstudent" type="submit" onclick="myPopup()" value="Leerling opvoeren" >Opvoeren Leerling</button> 
+        </div>-->
+    <!--    <footer>
+            ITPH project mede mogelijk gemaakt door: Thomas, Bas, Gerard en Derk
+        </footer>-->
 </body>
 </html> 
