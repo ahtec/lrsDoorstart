@@ -23,6 +23,7 @@ function getAbsentieCode( $pDescAbsentie)  {
 }
 
 
+
 	function leerlingIsVandaagNogNietAanwezigGeregistreerd($paramLeerlingID) {
 		$eruit = false;
 		$huidigeDatum = date("Y-m-d");
