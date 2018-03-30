@@ -168,9 +168,10 @@ function myPopup_absentie(img) {
 
     popup.appendChild(submit);
     popup.setAttribute("class", "popupnaam");
-
-    // **********   var popupvak = document.getElementById("klasID");
-    var popupvak = document.getElementById("subclass");
+    
+    var popupvak = document.getElementById("tafel");
+    console.log(popupvak);
+//    var popupvak = document.getElementById("subclass");
     popupvak.appendChild(popup);
 }
 function oldmyPopup_absentie(img) {

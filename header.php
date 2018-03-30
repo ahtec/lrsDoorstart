@@ -45,6 +45,7 @@
 			var aTag = document.createElement("a");
 			aTag.setAttribute("href",menuItem);
 			aTag.innerHTML = menuText;
+                        aTag.style.fontWeight="bold"
 			if (menuItem == huidigePHP ) {
 				aTag.style.background = "black";
 				aTag.style.color = "white";
