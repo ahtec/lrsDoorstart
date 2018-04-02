@@ -1,6 +1,6 @@
 <?php
 
-require_once './connection.php';
+require_once "./connection.php";
 
 function getAbsentieCode($pDescAbsentie) {
     $eruit = 1;
@@ -20,6 +20,67 @@ function getAbsentieCode($pDescAbsentie) {
     echo $eruit;
     return $eruit;
 }
+
+
+
+
+	function leerlingIsVandaagNogNietAanwezigGeregistreerd($paramLeerlingID) {
+		$eruit = false;
+		$huidigeDatum = date("Y-m-d");
+		$huidigeTijd  = date("Hi");
+		$conn = connectToDb();
+		$sql = "SELECT * FROM aanwezigheid where `leerling_id` = ".$paramLeerlingID .
+		" and datum = '$huidigeDatum'" ;
+//		echo $sql;
+		$result = $conn->query($sql);
+		if ($result) {
+			$row = mysqli_fetch_array($result) ;
+			if (isset($row['leerling_id'])) {
+//				echo " 56 ";
+				$eruit = false ;
+			} else	{
+				//echo " 59 ";
+				$eruit = true;
+			}
+		}  else {
+//			echo " 63 ";
+			
+			$eruit = true;
+		}
+		$conn->close();
+		return($eruit);
+	}
+
+	function zetLeerlingenOpHetScherm($alleenAbsenteLeerlingen){
+		$sql = "SELECT * FROM `leerling`  order by `schermvolgnr";
+		$conn = connectToDb();
+		$recordSet = $conn->query($sql);
+		if ($recordSet) {
+			echo "<div id='thomas' class='klas' ondrop='drop(event,this)' ondragover='allowDrop(event)'> ";
+				while ($row = mysqli_fetch_array($recordSet)) {
+					if ($alleenAbsenteLeerlingen) {
+						// dit is de tak voor de absente leerlingen registratie
+						if (leerlingIsVandaagNogNietAanwezigGeregistreerd($row['id'])) {
+							echo " <div class='GroupAanwezigheid' id='afbContainer'> ";
+							echo "<img id = " . $row['id'] . " src=" . $row['foto'] . " width=130  onclick='myPopup_absentie(this)'> ";
+							echo "</div>";
+						} 
+					} else {
+						// dit is de tak voor de aanwezigheid  gewone
+						if (leerlingIsVandaagNogNietAanwezigGeregistreerd($row['id'])) {
+							echo " <div class='GroupAanwezigheid' id='afbContainer'> ";
+						}  else {
+							echo " <div  style='opacity:0.4' class='GroupAanwezigheid' id='afbContainer'> ";
+						}
+						echo "<img draggable='true' ondragstart='drag(event,this)'  id = " . $row['id'] . " src=" . $row['foto'] . " width=130  onclick='aanwezig(this)'> ";
+						echo "</div>";
+					} 
+				}
+			echo "</div >";
+		}	
+	}
+	
+
 
 
 function oldzetLeerlingenOpHetScherm($alleenAbsenteLeerlingen) {
@@ -45,6 +106,7 @@ function oldzetLeerlingenOpHetScherm($alleenAbsenteLeerlingen) {
                 }
                 echo "<img draggable='true' ondragstart='drag(event,this)'  id = " . $row['id'] . " src=" . $row['foto'] . " width=130  onclick='aanwezig(this)'> ";
                 echo "</div>";
+
             }
         }
         echo "</div >";
