@@ -2,7 +2,6 @@
 session_start();
 require_once './connection.php';
 require_once './functiesPHP.php';
-
 include_once 'header.php';
 ?>
 
