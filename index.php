@@ -114,58 +114,56 @@ include_once 'header.php';
                 echo "   onclick='aanwezig(this)' ><p id=naam >" . $row['naam'] . "</td>";
             } else {
                 echo "<td>  <img  style='opacity:0.4' id = " . $row['id'] . " src=" . $row['foto'];
-                echo "   onclick='aanwezig(this)' ><p id=gryednaam >" . $row['naam'] . "</td>";
+                echo "   onclick='aanwezig(this)' ><p id=gryednaam >" . $row['naam'] ;
+                echo "</p> <p> " . $absentieSignalering;
+                echo "</p>";
+                echo "</td>";
             }
         }
-        echo "</tr>";
 
 
         echo "</table>";
 
-//        echo "<div class='subclass' id='subclass'ondrop='drop(event, this)' ondragover='allowDrop(event)'>";
-//        echo "</div >";
-//        echo "<div id='zoekvak' ondrop='drop(event,this)' ondragover='allowDrop(event)'class='zoek'>";
-//        echo "</div >";
-//*********************************************************************************
+        //        echo "<div class='subclass' id='subclass'ondrop='drop(event, this)' ondragover='allowDrop(event)'>";
+        //        echo "</div >";
+        //        echo "<div id='zoekvak' ondrop='drop(event,this)' ondragover='allowDrop(event)'class='zoek'>";
+        //        echo "</div >";
+        //*********************************************************************************
         function geefAbsentieSignalering($paramLeerlingID) {
             $eruit = "";
             $huidigeDatum = date("Y-m-d");
             $huidigeTijd = date("Hi");
             $conn = connectToDb();
-/*             $sql = "SELECT * , `leerling`.`id` as `leerlingID`  FROM `aanwezigheid` JOIN  `leerling`  on  `leerling`.`id` =  `aanwezigheid`.`leerling_id` ";
+            /*             $sql = "SELECT * , `leerling`.`id` as `leerlingID`  FROM `aanwezigheid` JOIN  `leerling`  on  `leerling`.`id` =  `aanwezigheid`.`leerling_id` ";
             $sql = $sql . " JOIN  `absentie`  on  `absentie`.`id` =  `aanwezigheid`.`absentiecode`";
             $sql .= sprintf(" where `leerling`.`id` ='%s' ", $paramLeerlingID);
- */
+             */
 			//$sql = "SELECT * , `leerling`.`id` as `leerlingID`  FROM `aanwezigheid` JOIN  `leerling`  on  `leerling`.`id` =  `aanwezigheid`.`leerling_id` ";
 			//$sql = $sql . " JOIN  `absentie`  on  `absentie`.`id` =  `aanwezigheid`.`absentiecode`";
 			//$sql .= sprintf(" where `leerling`.`id` ='%s' ", $paramLeerlingID);
 			$huidigeDatum = date("Y-m-d");
 			$huidigeTijd  = date("Hi");
 			$conn = connectToDb();
-			$sql = "SELECT `absentie`.`signalering`  FROM aanwezigheid JOIN  `absentie`  on  `absentie`.`id` =  `aanwezigheid`.`absentiecode`";
+			$sql = "SELECT `absentie`.`signalering`  as `absentieOmschrijving`  FROM aanwezigheid JOIN  `absentie`  on  `absentie`.`id` =  `aanwezigheid`.`absentiecode`";
 			$sql .=	 " where `leerling_id` = ".$paramLeerlingID." and `datum` = '$huidigeDatum'" ;
 
 
-//    $sql = "SELECT * FROM aanwezigheid where `leerling_id` = " . $paramLeerlingID .
-//            " and datum = '$huidigeDatum'";
-             echo "<br>".$sql;
+            //    $sql = "SELECT * FROM aanwezigheid where `leerling_id` = " . $paramLeerlingID .
+            //            " and datum = '$huidigeDatum'";
+            //echo "<br>".$sql;
             $result = $conn->query($sql);
             if ($result) {
                 $row = mysqli_fetch_array($result);
-                if (isset($row['leerling_id'])) {
-
-
-
-
-$eruit = false;
+                if (isset($row['absentieOmschrijving'])) {
+                    $eruit = $row['absentieOmschrijving'];
                 } else {
                     //echo " 59 ";
-                    $eruit = true;
+                    $eruit = "";
                 }
             } else {
-//			echo " 63 ";
+                //			echo " 63 ";
 
-                $eruit = true;
+                $eruit = "";
             }
             $conn->close();
             return($eruit);
