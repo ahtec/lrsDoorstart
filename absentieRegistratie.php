@@ -130,7 +130,7 @@ include_once 'header.php';
             }
 
             #flexboxAbsentie >div {
-                max-width: 300px;
+                max-width: 250px;
                 /*max-height: 400px;*/
                 border: 1px solid white;
                 border-radius: 10px;

@@ -6,13 +6,34 @@ include_once 'header.php';
 ?>
 <html>
     <head>
-        <script src="lrsscript.js"></script>
+
         <link rel="stylesheet" type="text/css" href="opmaaklrs.css">   
         <meta charset="utf-8" />
         <title> Leerlingen Registratie Systeem </title>
-    </head>
+        <script src="lrsscript.js"></script>
+		</head>
     <style>	
-        div.figure {
+            #flexboxAbsentie {
+                display: flex;
+                /*flex-direction:row;*/
+                display: flexbox;
+                flex-wrap:wrap;
+                border: 1px solid white;
+                border-radius: 10px;
+                margin-top: 100px;
+                min-height: 15px;
+            }
+
+            #flexboxAbsentie >div {
+                max-width: 250px;
+                /*max-height: 400px;*/
+                border: 1px solid white;
+                border-radius: 10px;
+                margin: 5px;  
+            }
+
+	
+	div.figure {
             float: right;
             border: thin silver solid;
             margin: 0.5em;
@@ -25,7 +46,6 @@ include_once 'header.php';
             font-size: smaller;
             text-indent: 0;
         }
-
         table {
             width: 100%;
             border-collapse: separate;
@@ -34,8 +54,11 @@ include_once 'header.php';
             border-radius: 10px;
         }
 
+		
+		
         img {
             width: 100%;
+			border-radius: 10px 10px 0px 0px;
 
         }
 
@@ -63,19 +86,6 @@ include_once 'header.php';
             color: black;
         }
 
-        .GroupAanwezigheid	{
-            /*display: inline-block;*/
-            /*<!----    background: linear-gradient(rgba(128,128,128,0.3), rgba(0,0,128,0.7));*/  
-            /*---->*/
-            overflow: hidden;
-            text-overflow: ellipsis;
-            border: 1px solid white;
-            border-radius: 10px;
-            width: 24%;
-            margin: 5px;
-            object-fit: contain;
-        }
-
 
     </style>
 
@@ -100,9 +110,6 @@ include_once 'header.php';
         echo "<a href=  opvragenAanwezigheid.php?absentieCode=999 >Afwezig</a>";
         echo "<a href=  opvragenAanwezigheid.php?absentieCode=900 >Vandaag</a>";
         echo "</div>";
-        ?>   
-        <div  class="klas">
-            <?php
             if ($_REQUEST) {
                 if (isset($_REQUEST['absentieCode'])) {
                     if ($_REQUEST['absentieCode'] == "999") {
@@ -125,39 +132,28 @@ include_once 'header.php';
 
 
 //					echo($sql);
-            $conn = connectToDb();
-            $result = $conn->query($sql);
-            echo "<table>";
+        $conn = connectToDb();
+        $result = $conn->query($sql);
+		
+        echo "<div id=flexboxAbsentie>";
 
-            $rijTeller = 0;
+        $vorigID = 9999999;
+        while ($row = mysqli_fetch_array($result)) {
+			if ($vorigID != $row['leerlingID']) {
+				if ($vorigID != 9999999) {
+					echo "</div >";
+				}	
+				echo "<div> <img id = " . $row['id'] . " src=" . $row['foto'];
+                echo "  ><p id=naam >" . $row['naam'];
+                echo "</p> ";
+				$vorigID = $row['leerlingID'];
 
-            $vorigID = 9999999;
-            while ($row = mysqli_fetch_array($result)) {
-                if ($vorigID != $row['leerlingID']) {
-                    if ($vorigID != 9999999) {
-//                        echo "</div >";
-                        echo "</td>";
-                    }
-                    echo "\n";
-                    $rijTeller++;
-                    if ($rijTeller > 4) {
-                        $rijTeller = 1;
-                        echo "</tr>";
-                    }
-                    if ($rijTeller == 1) {
-                        echo "<tr>";
-                    }
-                    echo " <td class='GroupAanwezigheid' id='afbContainer'> ";
-                    echo "<img id = " . $row['id'] . " src=" . $row['foto'] . " width=100px  > \n";
-                    echo "<p id=naam  class='leerling'>" . $row['naam'] . " </p> ";
-                    $vorigID = $row['leerlingID'];
-                }
-                echo "<p>" . $row['datum'] . " om " . $row['tijd'] . " " . $row['signalering'] . " </p>\n";
-            }
-//            echo "</div ";
-            echo "</td>";
-            ?>    
+			}
+			echo "<p>" . $row['datum'] . " om " . $row['tijd'] . " " . $row['signalering'] . " </p>\n";
+		}
+	echo "</div ";
+?>    
 
-        </div>
-    </body			
-
+	</div>
+</body			
+</html>
