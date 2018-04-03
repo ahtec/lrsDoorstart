@@ -12,53 +12,17 @@ include_once 'header.php';
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="lrsscript.js"></script>
         <script>
-//            $(document).ready(function () {
-//                $("button").click(function () {
-//                   console.log($(this));
-//                    knop = $(this);
-////                    console.log(knop);
-//                    var text = "";
-//                    var i;
-////                    for (i = 0; i < knop.length; i++) {
-////                        text += knop.elements[i].value + "<br>";
-////                    }
-//                    
-////                    inhoudKnop = knop.elements[0].innerHTML;
-//                    inhoudKnop = knop.outherHTML;
-//                    leerlingID = knop.value;
-//                    console.log(inhoudKnop);
-//                    afwezig($(this));
-//
-//                })
-//            })
-//
-//
 
 
             function afwezig(leerlingID, absentieCodeUitSelect, pElement) {
-//                console.log(selectElement);
-                //Function  werkt niet vanuit de js file
-//                var parentDiv = selectElement.parentNode;
-//                console.log(parentDiv);
-
-
-//                var leerlingID = selectElement.id.value;
                 console.log(leerlingID);
-
-//                var leerlingID = parentDiv.id;
-//                var selectedIndexVanSelector = document.getElementById(selectElement.id).selectedIndex;
-//                var absentieCodeUitSelect = document.getElementById(selectElement.id).options[selectedIndexVanSelector].text;
-//                console.log(leerlingID);
-//                console.log(absentieCodeUitSelect);
-//                $(selectElement).fadeTo("slow", 0.40);
-
-
+				console.log(absentieCodeUitSelect);
                 $.post("storeAfwezigheid.php", {
                     leerlingID: leerlingID,
                     absentieCode: absentieCodeUitSelect},
                         function (data, status) {
-//                            console.log(data);
-//                            console.log(status);
+                            console.log(data);
+                            console.log(status);
                             if (status == "success") {
                                 leerlingImg = document.getElementById(leerlingID);
                                 console.log(pElement);
@@ -148,7 +112,7 @@ include_once 'header.php';
         function createButons($selectidname) {
             $eruit = "";
             $ParamConn = connectToDb();
-            $sql = "SELECT * FROM `absentie` ";
+            $sql = "SELECT * FROM `absentie` WHERE `id` <> 0 ";
             $erinResultSet = $ParamConn->query($sql);
             for ($x = 0; $x < $erinResultSet->num_rows; $x++) {
                 $row = $erinResultSet->fetch_assoc();

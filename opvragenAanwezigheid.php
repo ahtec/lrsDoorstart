@@ -116,12 +116,20 @@ include_once 'header.php';
                         $sql = "SELECT * , `leerling`.`id` as `leerlingID`  FROM `aanwezigheid` JOIN  `leerling`  on  `leerling`.`id` =  `aanwezigheid`.`leerling_id` ";
                         $sql = $sql . " JOIN  `absentie`  on  `absentie`.`id` =  `aanwezigheid`.`absentiecode`";
                         $sql .= " where `signalering` <> 'Aanwezig' ";
-                    } else {
-                        $sql = "SELECT * , `leerling`.`id` as `leerlingID`  FROM `aanwezigheid` JOIN  `leerling`  on  `leerling`.`id` =  `aanwezigheid`.`leerling_id` ";
-                        $sql = $sql . " JOIN  `absentie`  on  `absentie`.`id` =  `aanwezigheid`.`absentiecode`";
-                        $sql .= sprintf(" where `signalering` ='%s' ", $_REQUEST['absentieCode']);
-                    }
-                } else {
+                    } else {   
+						if ($_REQUEST['absentieCode'] == "900") {
+							$huidigeDatum = date("Y-m-d");
+							$sql = "SELECT * , `leerling`.`id` as `leerlingID`  FROM `aanwezigheid` JOIN  `leerling`  on  `leerling`.`id` =  `aanwezigheid`.`leerling_id` ";
+							$sql = $sql . " JOIN  `absentie`  on  `absentie`.`id` =  `aanwezigheid`.`absentiecode`";
+							$sql .= " where `datum` =  '$huidigeDatum' ";
+						} else {	
+					
+							$sql = "SELECT * , `leerling`.`id` as `leerlingID`  FROM `aanwezigheid` JOIN  `leerling`  on  `leerling`.`id` =  `aanwezigheid`.`leerling_id` ";
+							$sql = $sql . " JOIN  `absentie`  on  `absentie`.`id` =  `aanwezigheid`.`absentiecode`";
+							$sql .= sprintf(" where `signalering` ='%s' ", $_REQUEST['absentieCode']);
+						}
+					}
+                } else {       // Geen absentie code ingevukld, laat alles zien
                     $sql = "SELECT * , `leerling`.`id` as `leerlingID`  FROM `aanwezigheid` JOIN  `leerling`  on  `leerling`.`id` =  `aanwezigheid`.`leerling_id` ";
                     $sql = $sql . " JOIN  `absentie`  on  `absentie`.`id` =  `aanwezigheid`.`absentiecode`";
                 }
