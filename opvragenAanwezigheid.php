@@ -4,7 +4,7 @@ require_once './connection.php';
 require_once './functiesPHP.php';
 include_once 'header.php';
 $datumVan = $_COOKIE["datumVan"];
-var_dump($datumVan);
+//var_dump($datumVan);
 if (isset($_REQUEST["formDatumVan"])) {
 	$datumVan = $_REQUEST["formDatumVan"];
 	setcookie("datumVan"     ,$datumVan     ,time() + 86400 , "/");
@@ -155,11 +155,17 @@ if (isset($_REQUEST["formDatumTotEnMet"])) {
 			// hier begint de opbouw VAN DE SQL variabele		
             if ($_REQUEST) {
                 if (isset($_REQUEST['absentieCode'])) {
+					// 999 is voor afwezig
                     if ($_REQUEST['absentieCode'] == "999") {
                         $sql = "SELECT * , `leerling`.`id` as `leerlingID`  FROM `aanwezigheid` JOIN  `leerling`  on  `leerling`.`id` =  `aanwezigheid`.`leerling_id` ";
                         $sql = $sql . " JOIN  `absentie`  on  `absentie`.`id` =  `aanwezigheid`.`absentiecode`";
                         $sql .= " where `signalering` <> 'Aanwezig' ";
+						if ((isset($datumVan)) and (isset($datumTotEnMet))){
+							$sql .= " AND  `datum` >= '$datumVan' ";
+							$sql .= " AND  `datum` <= '$datumTotEnMet' ";
+						}
                     } else {   
+					// 900 IS VOOR VANDAAG
 						if ($_REQUEST['absentieCode'] == "900") {
 							$huidigeDatum = date("Y-m-d");
 							$sql = "SELECT * , `leerling`.`id` as `leerlingID`  FROM `aanwezigheid` JOIN  `leerling`  on  `leerling`.`id` =  `aanwezigheid`.`leerling_id` ";
@@ -170,19 +176,34 @@ if (isset($_REQUEST["formDatumTotEnMet"])) {
 							$sql = "SELECT * , `leerling`.`id` as `leerlingID`  FROM `aanwezigheid` JOIN  `leerling`  on  `leerling`.`id` =  `aanwezigheid`.`leerling_id` ";
 							$sql = $sql . " JOIN  `absentie`  on  `absentie`.`id` =  `aanwezigheid`.`absentiecode`";
 							$sql .= sprintf(" where `signalering` ='%s' ", $_REQUEST['absentieCode']);
+							if ((isset($datumVan)) and (isset($datumTotEnMet))){
+								$sql .= " AND  `datum` >= '$datumVan' ";
+								$sql .= " AND  `datum` <= '$datumTotEnMet' ";
+							}
+
 						}
 					}
                 } else {       // Geen absentie code ingevukld, laat alles zien
                     $sql = "SELECT * , `leerling`.`id` as `leerlingID`  FROM `aanwezigheid` JOIN  `leerling`  on  `leerling`.`id` =  `aanwezigheid`.`leerling_id` ";
                     $sql = $sql . " JOIN  `absentie`  on  `absentie`.`id` =  `aanwezigheid`.`absentiecode`";
+					if ((isset($datumVan)) and (isset($datumTotEnMet))){
+							$sql .= " where  `datum` >= '$datumVan' ";
+							$sql .= " AND  `datum` <= '$datumTotEnMet' ";
+					}
+
                 }
             } else {
                 $sql = "SELECT * , `leerling`.`id` as `leerlingID`  FROM `aanwezigheid` JOIN  `leerling`  on  `leerling`.`id` =  `aanwezigheid`.`leerling_id` ";
                 $sql = $sql . " JOIN  `absentie`  on  `absentie`.`id` =  `aanwezigheid`.`absentiecode`";
+				if ((isset($datumVan)) and (isset($datumTotEnMet))){
+					$sql .= " where  `datum` >= '$datumVan' ";
+					$sql .= " AND  `datum` <= '$datumTotEnMet' ";
+				}
+
             }
 
 
-			
+// SELECT * , `leerling`.`id` as `leerlingID` FROM `aanwezigheid` JOIN `leerling` on `leerling`.`id` = `aanwezigheid`.`leerling_id` JOIN `absentie` on `absentie`.`id` = `aanwezigheid`.`absentiecode` where `datum` >= '2018-02-20' AND `datum` <= '2018-02-25'			
 //					echo($sql);
         $conn = connectToDb();
         $result = $conn->query($sql);
