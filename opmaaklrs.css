@@ -1,11 +1,3 @@
-/*.leerling 
-{
-    width: 60%;
-    display:inline-block;
-        //uitgesterd door gerard 14 jan 2018   height: 80%;   
-
-}*/
-
 .banner{
     height: 50px;
     background-color: lightgrey;
@@ -127,7 +119,6 @@ button:hover {
 body {
     padding-left: 20px;
     padding-right: 20px;
-	
     background: #a3a375;
 
 }
@@ -214,11 +205,23 @@ form{
 }
 
 input{
-    height: 30px;
+    font-family: arial;
+    font-size: 20px;
+	font-weight: bold;
+    padding: 10px;
+    height: 14px;
     margin: 5px;
-    padding: 2px;
+	color: rgb(85,26,139);
+	background-color: lightgray;
+	border-radius: 10px 10px 10px 10px;
 }
-/*            end opmaak button*/
+
+input:focus {
+    background-color: lightblue;
+    color: red;
+}
+
+
 
 .klas{
     display: flex;
@@ -353,9 +356,4 @@ oldp:first-of-type {
     font-size: 30px;
     text-shadow: 2px 2px #FF0000;
 
-}
-
-input:focus {
-    background-color: lightblue;
-    color: red;
 }

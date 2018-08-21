@@ -144,11 +144,11 @@ if (isset($_REQUEST["formDatumTotEnMet"])) {
 			echo "<a href=  opvragenAanwezigheid.php?absentieCode=900 >Vandaag</a>";
 			echo "</div>";
 			// toeveoegen datum selectie ingave
-			echo "<div>" ;
+			echo "<div class='topnav'>" ;
 			echo '<form method="get" action="opvragenAanwezigheid.php">';
 			echo '<input type="date" name="formDatumVan"      value='.$datumVan.'  >';
 			echo '<input type="date" name="formDatumTotEnMet" value='.$datumTotEnMet.'  >'; 
-			echo '<input type="submit" >'; 
+			echo '<input type="submit" value=Gebruik_deze_datums_als_selectie>'; 
 			echo "</div>" ;
 			
 			
