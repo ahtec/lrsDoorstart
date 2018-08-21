@@ -3,6 +3,18 @@ session_start();
 require_once './connection.php';
 require_once './functiesPHP.php';
 include_once 'header.php';
+$datumVan = $_COOKIE["datumVan"];
+var_dump($datumVan);
+if (isset($_REQUEST["formDatumVan"])) {
+	$datumVan = $_REQUEST["formDatumVan"];
+	setcookie("datumVan"     ,$datumVan     ,time() + 86400 , "/");
+}
+$datumTotEnMet = $_COOKIE["datumTotEnMet"];
+if (isset($_REQUEST["formDatumTotEnMet"])) {
+	$datumTotEnMet = $_REQUEST["formDatumTotEnMet"];
+	setcookie("datumTotEnMet",$datumTotEnMet,time() + 86400 , "/");
+	}	
+
 ?>
 <html>
     <head>
@@ -124,17 +136,6 @@ include_once 'header.php';
 
     <body>
         <?php
- 			$datumVan = $_COOKIE["datumVan"];
-			//var_dump($datumVan);
-			if (isset($_REQUEST["formDatumVan"])) {
-				$datumVan = $_REQUEST["formDatumVan"];
-				setcookie("datumVan"     ,$datumVan     ,time() + 86400 , "/");
-			}
-			$datumTotEnMet = $_COOKIE["datumTotEnMet"];
-			if (isset($_REQUEST["formDatumTotEnMet"])) {
-				$datumTotEnMet = $_REQUEST["formDatumTotEnMet"];
-				setcookie("datumTotEnMet",$datumTotEnMet,time() + 86400 , "/");
-				}	
 
 
 		
@@ -146,7 +147,7 @@ include_once 'header.php';
 			echo "<div>" ;
 			echo '<form method="get" action="opvragenAanwezigheid.php">';
 			echo '<input type="date" name="formDatumVan"      value='.$datumVan.'  >';
-			echo '<input type="date" name="formDatumTotenmet" value='.$datumTotEnMet.'  >'; 
+			echo '<input type="date" name="formDatumTotEnMet" value='.$datumTotEnMet.'  >'; 
 			echo '<input type="submit" >'; 
 			echo "<div>" ;
 			
@@ -222,13 +223,7 @@ include_once 'header.php';
 
             return $eruit; 
         }
-		
-		
-
-
-	
 ?>    
-
 	</div>
 </body			
 </html>
