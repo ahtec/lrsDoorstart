@@ -124,43 +124,34 @@ include_once 'header.php';
 
     <body>
         <?php
-        function createButons($selectidname) {
-			$eruit = "";
-			$ParamConn = connectToDb();
-            $sql           = "SELECT * FROM `absentie` ";
-            $erinResultSet = $ParamConn->query($sql);
-            for ($x = 0; $x < $erinResultSet->num_rows; $x++) {
-                $row = $erinResultSet->fetch_assoc();  
-//                echo $row['signalering'];
-                $sg=$row['signalering'];
-                $eruit .= "<a href=  opvragenAanwezigheid.php?absentieCode=". $sg. "> ".$sg . " </a>";
-            }
+ 			$datumVan = $_COOKIE["datumVan"];
+			//var_dump($datumVan);
+			if (isset($_REQUEST["formDatumVan"])) {
+				$datumVan = $_REQUEST["formDatumVan"];
+				setcookie("datumVan"     ,$datumVan     ,time() + 86400 , "/");
+			}
+			$datumTotEnMet = $_COOKIE["datumTotEnMet"];
+			if (isset($_REQUEST["formDatumTotEnMet"])) {
+				$datumTotEnMet = $_REQUEST["formDatumTotEnMet"];
+				setcookie("datumTotEnMet",$datumTotEnMet,time() + 86400 , "/");
+				}	
 
-            return $eruit; 
-        }
+
 		
-		function createSelectieDatumForm() {
-			$datumVan = $_COOKIE["datumVan"];
-			$datumTotEnMet = $_COOKIE["datumTotenmet"];
-
-			echo '<form method="post" action="opvragenAanwezigheid.php?datumVan='.$datumVan.'&datumTotEnMet='.$datumTotEnMet.' ">';
-			echo '<input type="date" name="datumVan"      value='.$datumVan.'  >';
-			echo '<input type="date" name="datumTotenmet" value='.$datumTotEnMet.'  >'; 
+			echo "<div class='topnav' >" . createButons("test");
+			echo "<a href=  opvragenAanwezigheid.php?absentieCode=999 >Afwezig</a>";
+			echo "<a href=  opvragenAanwezigheid.php?absentieCode=900 >Vandaag</a>";
+			echo "</div>";
+			// toeveoegen datum selectie ingave
+			echo "<div>" ;
+			echo '<form method="get" action="opvragenAanwezigheid.php">';
+			echo '<input type="date" name="formDatumVan"      value='.$datumVan.'  >';
+			echo '<input type="date" name="formDatumTotenmet" value='.$datumTotEnMet.'  >'; 
 			echo '<input type="submit" >'; 
-
-			//			echo '<button onclick="zetDatumSelectie(this)">gebruik deze datums</button>';
-		}
-
-	
-		
-        echo "<div class='topnav' >" . createButons("test");
-        echo "<a href=  opvragenAanwezigheid.php?absentieCode=999 >Afwezig</a>";
-        echo "<a href=  opvragenAanwezigheid.php?absentieCode=900 >Vandaag</a>";
-        echo "</div>";
-// toeveoegen datum selectie ingave
-		echo "<div>" . createSelectieDatumForm() . "</div>" ;   
-		
-// hier begint de opbouw VAN DE SQL variabele		
+			echo "<div>" ;
+			
+			
+			// hier begint de opbouw VAN DE SQL variabele		
             if ($_REQUEST) {
                 if (isset($_REQUEST['absentieCode'])) {
                     if ($_REQUEST['absentieCode'] == "999") {
@@ -212,6 +203,30 @@ include_once 'header.php';
 			echo "<p>" . $row['datum'] . " om " . $row['tijd'] . " " . $row['signalering'] . " </p>\n";
 		}
 	echo "</div ";
+
+
+
+
+//********************  functies    **********************	
+	       function createButons($selectidname) {
+			$eruit = "";
+			$ParamConn = connectToDb();
+            $sql           = "SELECT * FROM `absentie` ";
+            $erinResultSet = $ParamConn->query($sql);
+            for ($x = 0; $x < $erinResultSet->num_rows; $x++) {
+                $row = $erinResultSet->fetch_assoc();  
+//                echo $row['signalering'];
+                $sg=$row['signalering'];
+                $eruit .= "<a href=  opvragenAanwezigheid.php?absentieCode=". $sg. "> ".$sg . " </a>";
+            }
+
+            return $eruit; 
+        }
+		
+		
+
+
+	
 ?>    
 
 	</div>
