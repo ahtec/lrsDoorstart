@@ -149,7 +149,7 @@ if (isset($_REQUEST["formDatumTotEnMet"])) {
 			echo '<input type="date" name="formDatumVan"      value='.$datumVan.'  >';
 			echo '<input type="date" name="formDatumTotEnMet" value='.$datumTotEnMet.'  >'; 
 			echo '<input type="submit" >'; 
-			echo "<div>" ;
+			echo "</div>" ;
 			
 			
 			// hier begint de opbouw VAN DE SQL variabele		
