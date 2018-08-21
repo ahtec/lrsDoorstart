@@ -4,7 +4,7 @@ require_once './connection.php';
 require_once './functiesPHP.php';
 include_once 'header.php';
 
-$datumTotenmet = date_create();
+$datumTotEnMet = date_create();
 $datumVan      = date_sub(date_create(), date_interval_create_from_date_string("7 days"));
 if((!isset($_COOKIE["datumVan"])) OR (!isset($_COOKIE["datumTotEnMet"]))) {
 	setcookie("datumTotEnMet",date_format($datumTotEnMet,"Y-m-d"),time() + 86400 , "/");

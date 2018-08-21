@@ -3,25 +3,6 @@ session_start();
 require_once './connection.php';
 require_once './functiesPHP.php';
 include_once 'header.php';
-
-
-$_COOKIE["datumTotenmet"]
-
-$huidigeDatum = date("Y-m-d");
-if((!isset($_COOKIE["datumVan"])) OR (!isset($_COOKIE["datumTotenmet"]))) {
-    echo "Cookie  not set!";
-	setcookie("datumTotenmet",$huidigeDatum);
-	
-	setcookie("datumVan",date_sub($huidigeDatum, date_interval_create_from_date_string("7 days")));
-	
-} else {
-    echo "Cookie datumVan is set!<br>";
-    echo "Value is: " . $_COOKIE["datumVan"];
-    echo "<br>Cookie datumTotenmet is set!<br>";
-    echo "Value is: " . $_COOKIE["datumTotenmet"];
-}
-
-
 ?>
 <html>
     <head>
@@ -159,12 +140,12 @@ if((!isset($_COOKIE["datumVan"])) OR (!isset($_COOKIE["datumTotenmet"]))) {
         }
 		
 		function createSelectieDatumForm() {
-			$datumVan = $_COOKIE["datumVan"]
-			$datumTotenmet = $_COOKIE["datumTotenmet"]
+			$datumVan = $_COOKIE["datumVan"];
+			$datumTotEnMet = $_COOKIE["datumTotenmet"];
 
-			echo '<form method="post" action="zetDatumSelectie.php">';
+			echo '<form method="post" action="opvragenAanwezigheid.php?datumVan='.$datumVan.'&datumTotEnMet='.$datumTotEnMet.' ">';
 			echo '<input type="date" name="datumVan"      value='.$datumVan.'  >';
-			echo '<input type="date" name="datumTotenmet" value='.$datumTotenmet.'  >'; 
+			echo '<input type="date" name="datumTotenmet" value='.$datumTotEnMet.'  >'; 
 			echo '<input type="submit" >'; 
 
 			//			echo '<button onclick="zetDatumSelectie(this)">gebruik deze datums</button>';
