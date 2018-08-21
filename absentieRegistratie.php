@@ -26,7 +26,7 @@ include_once 'header.php';
                             if (status == "success") {
                                 leerlingImg = document.getElementById(leerlingID);
                                 console.log(pElement);
-                                $(leerlingImg).fadeTo("slow", 0.30);
+                                $(leerlingImg).fadeTo("fast", 0.40);
                                 pElement.style.background = "black";
                                 pElement.style.color = "white";
 

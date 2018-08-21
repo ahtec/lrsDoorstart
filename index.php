@@ -3,6 +3,13 @@ session_start();
 require_once './connection.php';
 require_once './functiesPHP.php';
 include_once 'header.php';
+
+$datumTotenmet = date_create();
+$datumVan      = date_sub(date_create(), date_interval_create_from_date_string("7 days"));
+if((!isset($_COOKIE["datumVan"])) OR (!isset($_COOKIE["datumTotEnMet"]))) {
+	setcookie("datumTotEnMet",date_format($datumTotEnMet,"Y-m-d"),time() + 86400 , "/");
+	setcookie("datumVan"     ,date_format($datumVan     ,"Y-m-d"),time() + 86400 , "/");
+} 
 ?>
 
 <html>
@@ -21,9 +28,9 @@ include_once 'header.php';
                     var temp = window.getComputedStyle(leerling).getPropertyValue("opacity");
                     console.log(temp);
                     if (temp == 1) {
-                        $(leerling).fadeTo("slow", 0.40);
+                        $(leerling).fadeTo("fast", 0.40);
                     } else {
-                        $(leerling).fadeTo("slow", 1.0);
+                        $(leerling).fadeTo("fast", 1.0);
                     }
                 });
             }

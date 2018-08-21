@@ -3,6 +3,25 @@ session_start();
 require_once './connection.php';
 require_once './functiesPHP.php';
 include_once 'header.php';
+
+
+$_COOKIE["datumTotenmet"]
+
+$huidigeDatum = date("Y-m-d");
+if((!isset($_COOKIE["datumVan"])) OR (!isset($_COOKIE["datumTotenmet"]))) {
+    echo "Cookie  not set!";
+	setcookie("datumTotenmet",$huidigeDatum);
+	
+	setcookie("datumVan",date_sub($huidigeDatum, date_interval_create_from_date_string("7 days")));
+	
+} else {
+    echo "Cookie datumVan is set!<br>";
+    echo "Value is: " . $_COOKIE["datumVan"];
+    echo "<br>Cookie datumTotenmet is set!<br>";
+    echo "Value is: " . $_COOKIE["datumTotenmet"];
+}
+
+
 ?>
 <html>
     <head>
@@ -10,7 +29,40 @@ include_once 'header.php';
         <link rel="stylesheet" type="text/css" href="opmaaklrs.css">   
         <meta charset="utf-8" />
         <title> Leerlingen Registratie Systeem </title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="lrsscript.js"></script>
+        <script >
+		function zetDatumSelectie() {
+			fdatum = document.getElementById("datumVan").name;
+			var currentVal = fdatum.value;
+                console.log("in f" );
+                console.log(fdatum);
+                console.log(currentVal);
+				
+				
+		}
+		
+		
+		</script>
+		
+		<script>
+			$(document).ready(function(){
+			$("button").click(function(){
+			$("input:text").val(function(n, c){
+            return c + " Griffin";
+        });
+    });
+});
+
+
+
+<p>Name: <input type="text" name="user" value="Peter"></p>
+
+<button>Set the value of the input field</button>
+
+
+</script>
+		
 		</head>
     <style>	
             #flexboxAbsentie {
@@ -105,11 +157,29 @@ include_once 'header.php';
 
             return $eruit; 
         }
+		
+		function createSelectieDatumForm() {
+			$datumVan = $_COOKIE["datumVan"]
+			$datumTotenmet = $_COOKIE["datumTotenmet"]
 
+			echo '<form method="post" action="zetDatumSelectie.php">';
+			echo '<input type="date" name="datumVan"      value='.$datumVan.'  >';
+			echo '<input type="date" name="datumTotenmet" value='.$datumTotenmet.'  >'; 
+			echo '<input type="submit" >'; 
+
+			//			echo '<button onclick="zetDatumSelectie(this)">gebruik deze datums</button>';
+		}
+
+	
+		
         echo "<div class='topnav' >" . createButons("test");
         echo "<a href=  opvragenAanwezigheid.php?absentieCode=999 >Afwezig</a>";
         echo "<a href=  opvragenAanwezigheid.php?absentieCode=900 >Vandaag</a>";
         echo "</div>";
+// toeveoegen datum selectie ingave
+		echo "<div>" . createSelectieDatumForm() . "</div>" ;   
+		
+// hier begint de opbouw VAN DE SQL variabele		
             if ($_REQUEST) {
                 if (isset($_REQUEST['absentieCode'])) {
                     if ($_REQUEST['absentieCode'] == "999") {
@@ -139,6 +209,7 @@ include_once 'header.php';
             }
 
 
+			
 //					echo($sql);
         $conn = connectToDb();
         $result = $conn->query($sql);
