@@ -198,13 +198,13 @@ header nav ul li a:hover{
     border: 2px solid red;  
 
 }
-form{
+oldform{
     padding-left:10px;
     padding-bottom:10px;
     font-weight: bold;  
 }
 
-input{
+.datumForm{
     font-family: arial;
     font-size: 20px;
 	font-weight: bold;
@@ -221,7 +221,9 @@ input:focus {
     color: red;
 }
 
-
+#oldsellectieButton {
+ 	height: 35px;
+}
 
 .klas{
     display: flex;
@@ -333,7 +335,7 @@ oldimg{
 }
 
 
-.selector	{
+.OLDselector	{
     display: inline-block;
     color:red;
     border: 3px solid Indigo;

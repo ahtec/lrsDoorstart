@@ -23,7 +23,6 @@ if (isset($_REQUEST["formDatumTotEnMet"])) {
         <meta charset="utf-8" />
         <title> Leerlingen Registratie Systeem </title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="lrsscript.js"></script>
         <script >
 		function zetDatumSelectie() {
 			fdatum = document.getElementById("datumVan").name;
@@ -65,7 +64,7 @@ if (isset($_REQUEST["formDatumTotEnMet"])) {
                 flex-wrap:wrap;
                 border: 1px solid white;
                 border-radius: 10px;
-                margin-top: 100px;
+                margin-top: 10px;
                 min-height: 15px;
             }
 
@@ -144,12 +143,14 @@ if (isset($_REQUEST["formDatumTotEnMet"])) {
 			echo "<a href=  opvragenAanwezigheid.php?absentieCode=900 >Vandaag</a>";
 			echo "</div>";
 			// toeveoegen datum selectie ingave
-			echo "<div class='topnav'>" ;
-			echo '<form method="get" action="opvragenAanwezigheid.php">';
-			echo '<input type="date" name="formDatumVan"      value='.$datumVan.'  >';
-			echo '<input type="date" name="formDatumTotEnMet" value='.$datumTotEnMet.'  >'; 
-			echo '<input type="submit" value=Gebruik_deze_datums_als_selectie>'; 
-			echo "</div>" ;
+//			echo "<div class='topnav'>" ;
+//			echo "<div >" ;
+			echo '<form   method="get" action="opvragenAanwezigheid.php">';
+			echo '<input  type="date" name="formDatumVan"      value='.$datumVan.'  >';
+			echo '<input  type="date" name="formDatumTotEnMet" value='.$datumTotEnMet.'  >'; 
+			echo '<input   type="submit" value=Gebruik_deze_datums_als_selectie>'; 
+			echo "</form>" ;
+//			echo "</div>" ;
 			
 			
 			// hier begint de opbouw VAN DE SQL variabele		
