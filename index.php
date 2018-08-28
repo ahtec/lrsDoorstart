@@ -32,8 +32,10 @@ if((!isset($_COOKIE["datumVan"])) OR (!isset($_COOKIE["datumTotEnMet"]))) {
                     } else {
                         $(leerling).fadeTo("fast", 1.0);
                     }
-                });
+                              });
             }
+            
+            
         </script>
         <link rel="stylesheet" type="text/css" href="opmaaklrs.css">
         <meta charset="utf-8" />
@@ -97,6 +99,7 @@ if((!isset($_COOKIE["datumVan"])) OR (!isset($_COOKIE["datumTotEnMet"]))) {
     </head>
     <body>
         <?php
+//        $var = file($var)
         $sql = "SELECT * FROM `leerling`";
         $conn = connectToDb();
         $result = $conn->query($sql);
