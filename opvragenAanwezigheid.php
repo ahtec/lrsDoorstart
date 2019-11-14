@@ -10,11 +10,11 @@ if (isset($_REQUEST["formDatumVan"])) {
 	setcookie("datumVan"     ,$datumVan     ,time() + 86400 , "/");
 }
 $datumTotEnMet = $_COOKIE["datumTotEnMet"];
+//var_dump($datumTotEnMet);
 if (isset($_REQUEST["formDatumTotEnMet"])) {
 	$datumTotEnMet = $_REQUEST["formDatumTotEnMet"];
 	setcookie("datumTotEnMet",$datumTotEnMet,time() + 86400 , "/");
-	}	
-
+	}
 ?>
 <html>
     <head>
